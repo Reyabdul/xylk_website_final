@@ -15,6 +15,13 @@ const Products = () => {
         });
     };
 
+    //this is code we will be needing in the future for project 2: it returns the collections that contain all project 2 products
+    // const fetchCollections = () => {
+    //     client.collection.fetchAllWithProducts().then((res) => {
+    //         console.log(res);
+    //     })
+    // }
+
     useEffect(() => {
         fetchAllproducts();
     })
