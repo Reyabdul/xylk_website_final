@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Client from "shopify-buy";
 
 const client = Client.buildClient({
@@ -8,10 +8,13 @@ const client = Client.buildClient({
 
 
 const Products = () => {
+    //testing 'State Hooks'
+    //const [data, setData] = useState("");
 
-    const fetchAllproducts = () => {
+    const fetchAllProducts = () => {
         client.product.fetchAll().then((res) => {
             console.log(res);
+            //setData(res.data);`
         });
     };
 
@@ -23,14 +26,37 @@ const Products = () => {
     // }
 
     useEffect(() => {
-        fetchAllproducts();
+        fetchAllProducts();
     })
 
     return (
+        /*
         <div id = "products-list">
-            <ul></ul>
+            <ul>
+                {client.product.map(m => (
+                    <li>
+                        <img src={m.url} alt={m.name} width="100" />
+                    </li>
+                ))}
+            </ul>
         </div>
-    )
+        */
+        <div id = "products-list">
+        {Object.values(fetchAllProducts).map((value, index) => {
+            return (
+              <div key={index}>
+                <ul>
+                    <li>
+                        {console.log(value)}
+                        <img src={fetchAllProducts.images} />
+                    </li>
+                </ul>
+                <hr />
+              </div>
+            );
+        })}
+    </div>
+    );
 }
 
 export default Products;
