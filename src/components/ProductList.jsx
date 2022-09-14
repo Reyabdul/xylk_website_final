@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Client from "shopify-buy";
+import Modal from "./Modal";
 
 const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
 
@@ -10,9 +11,12 @@ const client = Client.buildClient({
 
 const Products = () => {
     const [rawData, setRawData] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     const fetchAllProducts = () => {
         client.product.fetchAll().then((res) => {
+            console.log(res);
             setRawData(res);
         }).catch((error) => {
             console.log(error);
@@ -28,13 +32,25 @@ const Products = () => {
             {rawData.map((product, i) => { //map over the intial raw data object
                 // console.log(product);
                 return <ul key = {i}>
-                    <li>{product.title}</li>
+                    <li >{product.title}</li>
                     <li>{product.id}</li>
-                    {product.images.map((image) => {
-                        return <img src = {image.src} style={{width: "100px"}}/>
-                    })}
+                    <li>
+                    <button
+                        className="openModalBtn"
+                        onClick={() => {
+                          setModalOpen(true);
+                        }}
+                    >
+                        {product.images.map((image) => {
+                            return <img key={image.id} src = {image.src} style={{width: "100px"}}/>
+                        })}
+                    </button>
+                    </li>
+                    {modalOpen && <Modal setOpenModal={setModalOpen} />}
                 </ul>
+                
             })}
+
         </div>
     )
 }

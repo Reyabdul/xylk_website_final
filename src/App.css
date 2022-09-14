@@ -1,0 +1,55 @@
+/* Site Stylesheet
+  1. Global Styles
+  2. Typography Styles
+  3. Structure Styles
+  4. Module Styles
+  5. Component Styles
+  6. Page Styles
+======================================== */
+
+/* 1. Global Styles
+======================================== */
+
+body {
+    padding: 0;
+    margin: 0;
+  }
+
+  
+/* 2. Typography Styles
+======================================== */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+  
+/* 3. Structure Styles
+======================================== */
+
+/* 4. Modules Styles
+======================================== */
+  
+/* 5. Component Styles
+======================================== */
+
+/* 6. Page Styles
+ ======================================== */
+ /*
+ .App {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Nunito", sans-serif;
+  }
+  
+  .App .openModalBtn {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+  }
+    
+  */
