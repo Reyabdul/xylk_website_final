@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import ProductList from "./components/ProductList";
-import "./App.css";
+import "./style/App.css";
 
 const App = () => {
     
@@ -25,5 +25,4 @@ const App = () => {
 
     );
   }
-  
 export default App;

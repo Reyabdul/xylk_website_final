@@ -1,37 +1,72 @@
-import React from "react";
-import "./Modal.css";
+import React, { useEffect, useState } from "react";import Client from "shopify-buy";
+import "../style/Modal.css";
 
-function Modal({ setOpenModal }) {
+const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
+
+const client = Client.buildClient({
+    storefrontAccessToken: SHOPIFY_KEY,
+    domain: "xylk.myshopify.com"
+});
+
+const Modal = ({setOpenModal}) => {
+
+  const [rawData, setRawData] = useState([]);
+
+
+  const fetchAllProducts = () => {
+      client.product.fetchAll().then((res) => {
+          console.log(res);
+          setRawData(res);
+      }).catch((error) => {
+          console.log(error);
+      })
+  };
+
+  useEffect(() => {
+      fetchAllProducts();
+  }, []);
+
+
   return (
-    <div className="modalBackground">
-      <div className="modalContainer">
-        <div className="titleCloseBtn">
-          <button
-            onClick={() => {
-              setOpenModal(false);
-            }}
-          >
-            X
-          </button>
-        </div>
-        <div className="title">
-        </div>
-        <div className="body">
-          <p>The next page looks amazing. Hope you want to go there!</p>
-        </div>
-        <div className="footer">
-          <button
-            onClick={() => {
-              setOpenModal(false);
-            }}
-            id="cancelBtn"
-          >
-            Cancel
-          </button>
-          <button>Continue</button>
-        </div>
-      </div>
-    </div>
+    <>
+      {rawData.map((product, i) => { //map over the intial raw data object
+         return <div className="modalBackground">
+            <div className="modalContainer">
+              <div className="titleCloseBtn">
+                
+                {/*CLSOSE BUTTON*/}
+                <button
+                  onClick={() => {
+                    setOpenModal(false);
+                  }}
+                >
+                  X
+                </button>
+              </div>
+              <div className="title">
+              </div>
+              <div className="body">
+
+                {product.title}
+                {product.id}
+              
+              </div>
+              <div className="footer">
+                <button
+                  onClick={() => {
+                    setOpenModal(false);
+                  }}
+                  id="cancelBtn"
+                >
+                  Cancel
+                </button>
+                <button>Continue</button>
+        
+              </div>
+            </div>
+          </div>
+        })};
+    </>
   );
 }
 
