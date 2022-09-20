@@ -46,9 +46,12 @@ const Modal = ({setOpenModal}) => {
               <div className="title">
               </div>
               <div className="body">
+                <ul key={product.id}>
+                  <li>{product.title}</li>
+                  <li>{product.id}</li>
+                  <li>{product.description}</li>
+                </ul>
 
-                {product.title}
-                {product.id}
               
               </div>
               <div className="footer">
