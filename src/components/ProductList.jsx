@@ -10,6 +10,19 @@ const client = Client.buildClient({
     domain: "xylk.myshopify.com"
 });
 
+//this is your new "modal" rendering function
+const renderData = (product) => {
+    const productObj = {
+        "title": product.title,
+        "description": "bong",
+        "img": "whatever"
+    }
+
+    return (
+        <div></div>
+    )
+}
+
 const ProductList = () => {
     
     //Shopify product data
@@ -46,12 +59,12 @@ const ProductList = () => {
             <div className="container">
                 {rawData.map((product, i) => (
                     <div className='item' key={product.id} >
-                        {console.log(i)} {console.log(product)}
+                     {/* {console.log(product)} */}
                         <img 
                             src={product.images[0].src} 
                             alt={product.title} 
                             style={{width: "100px"}} 
-                            onClick={()=> { 
+                            onClick={()=> {
                                 setModalData(product);
                                 setModalOpen(true);
                                 }
