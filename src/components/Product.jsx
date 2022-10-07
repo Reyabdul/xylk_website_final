@@ -28,9 +28,23 @@ const Product = () => {
 
 
     return (
-        <div>
-            
-        </div>
+        <>
+          <ul>
+            <div className="container">
+            {rawData.map((product, i) => (
+                <div className='item' key={product.id}>
+                    <li>
+                        <img 
+                            src={product.images[0].src} 
+                            alt={product.title} 
+                            style={{width: "100px"}} 
+                        />
+                    </li>
+                </div>
+            ))}
+            </div>
+          </ul>
+        </>
     )
 };
 

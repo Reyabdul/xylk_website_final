@@ -11,8 +11,15 @@ const client = Client.buildClient({
 });
 
 const ProductList = () => {
+    
+    //Shopify product data
     const [rawData, setRawData] = useState([]);
+
+    //Modal 'open' state
     const [modalOpen, setModalOpen] = useState(false);
+
+    //Shopify product data that will display in the modal
+    const [modalData, setModalData] = useState(null);
 
 
     const fetchAllProducts = () => {
@@ -30,30 +37,37 @@ const ProductList = () => {
     }, []);
 
 
+    //----- MODAL REFERENCE FROM STACK OVERFLOW
+        //ref: https://stackoverflow.com/questions/67725086/how-do-i-use-react-modal-with-a-map-function
+
     return (
 
         <>
-        <div className="container">
-          {rawData.map((product, i) => (
-            <div className='item' key={product.id} >
-                <img 
-                    src={product.images[0].src} 
-                    alt={product.title} 
-                    style={{width: "100px"}} 
-                    onClick={()=> 
-                        setModalOpen(true)}
-                />
+            <div className="container">
+                {rawData.map((product, i) => (
+                    <div className='item' key={product.id} >
+                        {console.log(i)} {console.log(product)}
+                        <img 
+                            src={product.images[0].src} 
+                            alt={product.title} 
+                            style={{width: "100px"}} 
+                            onClick={()=> { 
+                                setModalData(product);
+                                setModalOpen(true);
+                                }
+                            }
+                        />
+                    </div>
+                ))}
+                {modalOpen &&
+                <Modal 
+                    setOpenModal={setModalOpen}>
+                        {modalData.title}
+                        {modalData.description}
+                </Modal>}    
             </div>
-          ))}
-        {modalOpen &&
-        <Modal setOpenModal={setModalOpen}>
-            
-        </Modal>}    
-        </div>
+        </>
 
-
-
-      </>
     )    
 }
 
@@ -66,3 +80,4 @@ export default ProductList;
     //         console.log(res);
     //     })
     // }
+
