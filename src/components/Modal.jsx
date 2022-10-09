@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Client from "shopify-buy";
+import React, { useEffect, useState } from "react";import Client from "shopify-buy";
 import "../style/Modal.css";
 
 const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
@@ -11,11 +10,7 @@ const client = Client.buildClient({
 
 const Modal = ({setOpenModal}) => {
 
-  //shopify product data
   const [rawData, setRawData] = useState([]);
-
-  //Shopify product data that will display in the modal
-  const [modalData, setModalData] = useState(null);
 
 
   const fetchAllProducts = () => {
@@ -51,8 +46,13 @@ const Modal = ({setOpenModal}) => {
               <div className="title">
               </div>
               <div className="body">
-                {product.title}
-                {product.description}
+                <ul key={product.id}>
+                  <li>{product.title}</li>
+                  <li>{product.id}</li>
+                  <li>{product.description}</li>
+                </ul>
+
+              
               </div>
               <div className="footer">
                 <button

@@ -9,20 +9,7 @@ const App = () => {
     return (
       <div className="App">
         <ProductList />
-        {/*
-        <button
-          className="openModalBtn"
-          onClick={() => {
-            setModalOpen(true);
-          }}
-        >
-          Open
-        </button>
-  
-        {modalOpen && <Modal setOpenModal={setModalOpen} />}
-                */}
       </div>
-
     );
   }
 export default App;
