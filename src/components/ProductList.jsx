@@ -14,6 +14,7 @@ const client = Client.buildClient({
 const renderData = (product) => {
     const productObj = {
         "title": product.title,
+<<<<<<< HEAD
         "description": product.description,
     }
 
@@ -22,6 +23,14 @@ const renderData = (product) => {
             {console.log(productObj["title"])}
             {console.log(productObj["description"])}
         </div>
+=======
+        "description": "bong",
+        "img": "whatever"
+    }
+
+    return (
+        <div></div>
+>>>>>>> 898624a526779ec2860ca981faf4179dee9fbcd8
     )
 }
 
@@ -71,8 +80,7 @@ const ProductList = () => {
                                 //console.log(product);
                                 renderData(product);
                                 //console.log(renderData(product));
-                                setModalOpen(true);
-                                }
+
                             }
                         />
                     </div>
