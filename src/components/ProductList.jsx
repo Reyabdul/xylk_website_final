@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Client from "shopify-buy";
-import Modal from "./Modal";
+import Product from "./Product";
 
 
 const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
@@ -10,17 +10,21 @@ const client = Client.buildClient({
     domain: "xylk.myshopify.com"
 });
 
+let productObj;
+
 //this is your new "modal" rendering function
 const renderData = (product) => {
-    const productObj = {
+    productObj = {
         "title": product.title,
         "description": product.description,
     }
 
     return (
         <div>
-            {console.log(productObj["title"])}
-            {console.log(productObj["description"])}
+            {productObj["title"]}
+            {productObj["description"]}
+            {/* {console.log(productObj["title"])}
+            {console.log(productObj["description"])} */}
         </div>
     )
 }
@@ -67,9 +71,10 @@ const ProductList = () => {
                             alt={product.title} 
                             style={{width: "100px"}} 
                             onClick={()=> {
-                                //console.log(i);
-                                //console.log(product);
+                                console.log(i);
+                                console.log(product);
                                 renderData(product);
+                                setModalOpen(true);
                                 //console.log(renderData(product));
 
                             }
@@ -78,9 +83,9 @@ const ProductList = () => {
                     </div>
                 ))}
                 {modalOpen &&
-                <Modal 
-                    setOpenModal={setModalOpen}>
-                </Modal>}    
+                <Product setOpenModal={setModalOpen} productObj={productObj}/> 
+                }
+                  
             </div>
         </>
 

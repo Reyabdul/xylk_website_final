@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Client from "shopify-buy";
+import ProductList from "./ProductList";
+import "../style/Modal.css";
 
 const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
 
@@ -9,45 +11,46 @@ const client = Client.buildClient({
 });
 
 
-const Product = () => {
-    const [rawData, setRawData] = useState([]);
+const Product = ({setOpenModal, productObj}) => {
+    //const [productData, setProductData] = useState([]);
 
-
-    const fetchAllProducts = () => {
-        client.product.fetchAll().then((res) => {
-            console.log(res);
-            setRawData(res);
-        }).catch((error) => {
-            console.log(error);
-        })
-    };
-
-    useEffect(() => {
-        fetchAllProducts();
-    }, []);
-
-    //take out modal and mak product.jsx handle the product modal
-    //In product.jsx make each image have its own unique product details
-
-    return (
-        <>
-          <ul>
-            <div className="container">
-            {rawData.map((product, i) => (
-                <div className='item' key={product.id}>
-                    <li>
-                        <img 
-                            src={product.images[0].src} 
-                            alt={product.title} 
-                            style={{width: "100px"}}
-                        />
-                    </li>
-                </div>
-            ))}
+  return (
+    <>
+      <div className="modalBackground">
+            <div className="modalContainer">
+              <div className="titleCloseBtn">
+                
+                {/*CLOSE BUTTON*/}
+                <button
+                  onClick={() => {
+                    setOpenModal(false);
+                  }}
+                >
+                  X
+                </button>
+              </div>
+              <div className="title">
+              </div>
+              <div className="body">
+                  {productObj.title}
+                  {productObj.description}
+              </div>
+              <div className="footer">
+                <button
+                  onClick={() => {
+                    setOpenModal(false);
+                  }}
+                  id="cancelBtn"
+                >
+                  Cancel
+                </button>
+                <button>Continue</button>
+        
+              </div>
             </div>
-          </ul>
-        </>
-    )
-};
+          </div>
+    </>
+  );
+}
 
 export default Product;
