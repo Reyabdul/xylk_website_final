@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Client from "shopify-buy";
 import ProductList from "./ProductList";
-import "../style/Modal.css";
+import "../style/Product.css";
 
-const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
-
-const client = Client.buildClient({
-    storefrontAccessToken: SHOPIFY_KEY,
-    domain: "xylk.myshopify.com"
-});
 
 
 const Product = ({setOpenModal, productObj}) => {
-    //const [productData, setProductData] = useState([]);
 
   return (
     <>
@@ -32,8 +24,24 @@ const Product = ({setOpenModal, productObj}) => {
               <div className="title">
               </div>
               <div className="body">
-                  {productObj.title}
-                  {productObj.description}
+                <div className="product-images">
+                  {productObj.images.map(image => (
+                    <img
+                    src={image.src}
+                    alt={image.title} 
+                    style={{width: "100px"}} 
+                    />
+                  ))}
+                </div>
+                <div className="product-details">
+                  <h2>{productObj.title}</h2>
+                    <button
+                    
+                    >
+                      Add to cart
+                    </button>
+                    <p>{productObj.description}</p>
+                </div>  
               </div>
               <div className="footer">
                 <button

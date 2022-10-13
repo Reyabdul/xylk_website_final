@@ -1,3 +1,5 @@
+
+
 .modalBackground {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -13,10 +15,21 @@
 
 }
   
-
 .modalContainer{
   background-color: white;
-  width: 60%;
-  height: 50%;
-  
+  width: 80%;
+  height: 70%;
+}
+
+.modalContainer .body{
+  display: flex;
+  padding: 2.8rem;
+}
+
+.modalContainer .product-images{
+  width: 50%;
+}
+
+.modalContainer .product-details{
+  width: 50%;
 }

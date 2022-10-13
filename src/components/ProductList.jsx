@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Client from "shopify-buy";
+import Checkout from "./Checkout";
 import Product from "./Product";
 
-
+//ACCESSING SHOPIFY
 const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
 
 const client = Client.buildClient({
@@ -10,40 +11,40 @@ const client = Client.buildClient({
     domain: "xylk.myshopify.com"
 });
 
+
 let productObj;
 
 //this is your new "modal" rendering function
 const renderData = (product) => {
+    console.log(product)
     productObj = {
         "title": product.title,
         "description": product.description,
+        "images": product.images, 
     }
 
     return (
         <div>
             {productObj["title"]}
             {productObj["description"]}
-            {/* {console.log(productObj["title"])}
-            {console.log(productObj["description"])} */}
+            {productObj["images"]}
         </div>
     )
 }
 
+//Creating Product List to show in homepage
 const ProductList = () => {
     
-    //Shopify product data
+    //Shopify 'product' data
     const [rawData, setRawData] = useState([]);
 
     //Modal 'open' state
     const [modalOpen, setModalOpen] = useState(false);
 
-    //Shopify product data that will display in the modal
-    const [modalData, setModalData] = useState(null);
-
 
     const fetchAllProducts = () => {
         client.product.fetchAll().then((res) => {
-            console.log(res);
+            //console.log(res);
             setRawData(res);
         }).catch((error) => {
             console.log(error);
@@ -64,26 +65,26 @@ const ProductList = () => {
         <>
             <div className="container">
                 {rawData.map((product, i) => (
+                    
                     <div className='item' key={product.id} >
-                     {/* {console.log(product)} */}
+                        {console.log(i)}
+                        {console.log(product)}
                         <img 
                             src={product.images[0].src} 
                             alt={product.title} 
                             style={{width: "100px"}} 
                             onClick={()=> {
-                                console.log(i);
-                                console.log(product);
                                 renderData(product);
                                 setModalOpen(true);
-                                //console.log(renderData(product));
-
                             }
                           }
                         />
                     </div>
                 ))}
                 {modalOpen &&
-                <Product setOpenModal={setModalOpen} productObj={productObj}/> 
+                <Product setOpenModal={setModalOpen} productObj={productObj}>
+                    <Checkout />
+                </Product> 
                 }
                   
             </div>
