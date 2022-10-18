@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Client from "shopify-buy";
-import Checkout from "./Checkout";
+import Checkout from "./Cart";
 import Product from "./Product";
 
 //ACCESSING SHOPIFY
@@ -16,18 +16,23 @@ let productObj;
 
 //this is your new "modal" rendering function
 const renderData = (product) => {
-    console.log(product)
+    //console.log(product)
     productObj = {
+        "title": product.id,
         "title": product.title,
         "description": product.description,
         "images": product.images, 
+        "price": product.variants[0].price, 
+
     }
 
     return (
         <div>
+            {productObj["id"]}
             {productObj["title"]}
             {productObj["description"]}
             {productObj["images"]}
+            {productObj["price"]}
         </div>
     )
 }
@@ -41,7 +46,7 @@ const ProductList = () => {
     //Modal 'open' state
     const [modalOpen, setModalOpen] = useState(false);
 
-
+    //Fetch 'product' data from Shopify store
     const fetchAllProducts = () => {
         client.product.fetchAll().then((res) => {
             //console.log(res);
@@ -50,7 +55,6 @@ const ProductList = () => {
             console.log(error);
         })
     };
-
 
     useEffect(() => {
         fetchAllProducts();
@@ -67,9 +71,7 @@ const ProductList = () => {
                 {rawData.map((product, i) => (
                     
                     <div className='item' key={product.id} >
-                        {console.log(i)}
-                        {console.log(product)}
-                        <img 
+                     <img 
                             src={product.images[0].src} 
                             alt={product.title} 
                             style={{width: "100px"}} 
@@ -83,7 +85,6 @@ const ProductList = () => {
                 ))}
                 {modalOpen &&
                 <Product setOpenModal={setModalOpen} productObj={productObj}>
-                    <Checkout />
                 </Product> 
                 }
                   

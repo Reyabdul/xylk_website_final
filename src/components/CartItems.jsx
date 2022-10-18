@@ -9,26 +9,31 @@ const client = Client.buildClient({
     domain: "xylk.myshopify.com"
 });
 
+//Modal 'open' state
+const [modalOpen, setModalOpen] = useState(false);
 
-const Checkout = () => {
+const Cart = () => {
 
-    const cart = () => {
+    const checkoutCart = () => {
+
         client.checkout.create().then((checkout) => {
             // Do something with the checkout
             console.log(checkout);
           });
-    }
+    };
 
     return (
 
         <>
-            <div className="shopping-container">
 
+            <div className="cart-container">
+                
             </div>
+
         </>
 
     )
 }
 
 
-export default Checkout;
+export default Cart;

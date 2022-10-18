@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
+import App from "../App";
 import ProductList from "./ProductList";
 import "../style/Product.css";
+import Cart from "./Cart";
 
 
 
 const Product = ({setOpenModal, productObj}) => {
+
+  const [cartOpen, setCartOpen] = useState(false);
+
 
   return (
     <>
@@ -27,6 +32,7 @@ const Product = ({setOpenModal, productObj}) => {
                 <div className="product-images">
                   {productObj.images.map(image => (
                     <img
+                    key={productObj.id}
                     src={image.src}
                     alt={image.title} 
                     style={{width: "100px"}} 
@@ -35,10 +41,14 @@ const Product = ({setOpenModal, productObj}) => {
                 </div>
                 <div className="product-details">
                   <h2>{productObj.title}</h2>
+                    <p>{productObj.price}</p>
                     <button
-                    
-                    >
-                      Add to cart
+                      onClick={()=> {
+                        //setOpenModal(false)
+                        setCartOpen(true)
+
+                    }}>
+                    Add to cart
                     </button>
                     <p>{productObj.description}</p>
                 </div>  
@@ -56,6 +66,10 @@ const Product = ({setOpenModal, productObj}) => {
         
               </div>
             </div>
+            {cartOpen &&
+            <Cart setCartOpen={setCartOpen}>
+            </Cart> 
+        }    
           </div>
     </>
   );
