@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Client from "shopify-buy";
-import Product from "./Product";
 
 const SHOPIFY_KEY = process.env.REACT_APP_SHOPIFY_KEY;
 
@@ -9,18 +8,10 @@ const client = Client.buildClient({
     domain: "xylk.myshopify.com"
 });
 
-//Modal 'open' state
-const [modalOpen, setModalOpen] = useState(false);
+const CartItems = () => {
 
-const Cart = () => {
 
-    const checkoutCart = () => {
 
-        client.checkout.create().then((checkout) => {
-            // Do something with the checkout
-            console.log(checkout);
-          });
-    };
 
     return (
 
@@ -36,4 +27,4 @@ const Cart = () => {
 }
 
 
-export default Cart;
+export default CartItems;

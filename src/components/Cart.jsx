@@ -13,30 +13,48 @@ const client = Client.buildClient({
 
 const Cart = (setCartOpen) => {
 
+
     //Shopify 'cart' data
     const [cartData, setCartData] = useState([]);
 
-        const fetchCartData = () => {
-            client.checkout.create().then((checkout) => {
-                setCartData(checkout);
-                console.log(checkout);
 
-          }).catch((error) => {
-            console.log(error);
-          })
+    //Create checkout Id
+    const checkoutId = cartData.id;
+    console.log(cartData.id);
 
+
+    //fetching object for 'checkout'
+    const fetchCartData = () => {
+        client.checkout.create().then((checkout) => {
+            setCartData(checkout);
+            //console.log(checkout);
+      }).catch((error) => {
+        console.log(error);
+      })
     };
 
+    //using fetchCartData
     useEffect(() => {
         fetchCartData();
     }, []);
 
+
+
+
+
     return (
 
         <>
+
             <div className="cart-container">
-                {cartData.id}
+                {/*checkout id*/}
+                {checkoutId}
+                <br />
+                <br />
+                {/*total*/}
+                <strong>{cartData.totalPrice}</strong>
             </div>
+
         </>
 
     )

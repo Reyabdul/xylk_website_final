@@ -11,18 +11,19 @@ const client = Client.buildClient({
     domain: "xylk.myshopify.com"
 });
 
-
+//globalizing 'productObj' from 'renderData'
 let productObj;
 
 //this is your new "modal" rendering function
 const renderData = (product) => {
     //console.log(product)
     productObj = {
-        "title": product.id,
+        "id": product.id,
         "title": product.title,
         "description": product.description,
         "images": product.images, 
-        "price": product.variants[0].price, 
+        "price": product.variants[0].price,
+        "variants": product.variants[0].id 
 
     }
 
@@ -33,6 +34,7 @@ const renderData = (product) => {
             {productObj["description"]}
             {productObj["images"]}
             {productObj["price"]}
+            {productObj["variantId"]}
         </div>
     )
 }
@@ -70,19 +72,21 @@ const ProductList = () => {
             <div className="container">
                 {rawData.map((product, i) => (
                     
-                    <div className='item' key={product.id} >
-                     <img 
-                            src={product.images[0].src} 
-                            alt={product.title} 
-                            style={{width: "100px"}} 
-                            onClick={()=> {
-                                renderData(product);
-                                setModalOpen(true);
-                            }
-                          }
-                        />
+                    <div className='item' key={product.id}>
+                        <img 
+                               src={product.images[0].src} 
+                               alt={product.title} 
+                               style={{width: "100px"}} 
+                               onClick={()=> {
+                                   renderData(product);
+                                   setModalOpen(true);
+                               }
+                             }
+                           />
                     </div>
                 ))}
+
+                {/*Opens modal to display "Product" info*/}
                 {modalOpen &&
                 <Product setOpenModal={setModalOpen} productObj={productObj}>
                 </Product> 
