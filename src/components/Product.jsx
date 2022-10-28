@@ -25,7 +25,8 @@ const Product = ({ setOpenModal, productObj, checkoutId }) => {
     {
       variantId: productObj.variants,
       quantity: itemQty,
-      customAttributes: [{ key: "MyKey", value: "MyValue" }]
+      customAttributes: [{ key: "MyKey", value: "MyValue" }],
+      cost: productObj.price,
     }
   ];
 
@@ -39,7 +40,8 @@ const Product = ({ setOpenModal, productObj, checkoutId }) => {
   //adding items to 'cart'
   const addToCart = () => {
     client.checkout.addLineItems(checkoutId, lineItemsToAdd).then((checkout) => {
-      // Do something with the updated checkout
+      
+      
       console.log(checkout.lineItems); // Array with one additional line item
     });
   }
@@ -79,16 +81,17 @@ const Product = ({ setOpenModal, productObj, checkoutId }) => {
             <div className="product-details">
               <h2>{productObj.title}</h2>
                 <p>{productObj.price}</p>
-                <p>{productObj.variant}</p>
+                <p>{productObj.variants}</p>
               
               {/*Item qty input*/} 
               <div className="itemQty">
                 <input type="number" id="itemQty" name="itemQty" min="0" max="20" onChange={handleChange} value={itemQty} />
-                {/*IAdd to cart button*/} 
+                {/*Add to cart button*/} 
                 <button
                   onClick={() => {
                     //setOpenModal(false)
                     setCartOpen(true)
+                    addToCart();
                   }}>
                   Add to cart
                 </button>

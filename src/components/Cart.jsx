@@ -11,7 +11,7 @@ const client = Client.buildClient({
 });
 
 
-const Cart = (setCartOpen) => {
+const Cart = (productObj) => {
 
 
     //Shopify 'cart' data
@@ -27,7 +27,7 @@ const Cart = (setCartOpen) => {
     const fetchCartData = () => {
         client.checkout.create().then((checkout) => {
             setCartData(checkout);
-            //console.log(checkout);
+            console.log(checkout);
       }).catch((error) => {
         console.log(error);
       })
@@ -49,10 +49,11 @@ const Cart = (setCartOpen) => {
             <div className="cart-container">
                 {/*checkout id*/}
                 {checkoutId}
+
                 <br />
                 <br />
-                {/*total*/}
-                <strong>{cartData.totalPrice}</strong>
+                <strong>{cartData.totalDutyAmount}</strong>
+                
             </div>
 
         </>
