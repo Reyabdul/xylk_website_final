@@ -31,7 +31,7 @@ const Scene = ({ productData }) => {
     VIEW.offsetX  = VIEW.width / 2;
     VIEW.offsetY  = VIEW.height / 2;
 
-    const matterWidth = window.innerWidth, matterHeight = window.innerHeight - 70;
+    let matterWidth = window.innerWidth, matterHeight = window.innerHeight - 70;
 
     //Canvas
     const boxRef = useRef(null);
@@ -46,7 +46,7 @@ const Scene = ({ productData }) => {
             gravity: {
                 x: 0,
                 y: 0,
-                scale: 0.01 //The gravity scale factor
+                scale: 0 //The gravity scale factor
             }
         }), world = engine.world;
 
@@ -85,32 +85,35 @@ const Scene = ({ productData }) => {
                         fillStyle: "transparent",
                         sprite: {
                             texture: bodiesDom[i].firstChild.src,
-                            xScale: 0.06,
-                            yScale: 0.06,
+                            xScale: 0.08,
+                            yScale: 0.08,
                         }
                     },
                     url: productData[i].onlineStoreUrl,
                 })
             }
               //Applying the force to move the ball
-            Body.applyForce(body, 
-                { x: 100, y: 100 }, 
-                { x: Math.random() * 1.2, y: -Math.random() * 1.2 }
-            );
             bodies.push(body);
-            console.log(bodies[i]);
+
+            setInterval(() => {
+                for (let x = 0; x < bodies.length; x++) {
+                    Body.applyForce(bodies[x], 
+                        { x: 0, y: 0 }, 
+                        { x: 0.1, y: -0.1 }
+                    );
+                }
+            }, 500)
         }
 
         //Wall options'
         const WALLWIDTH = 20;
 
         const wallOptions = {
-            restitution: 1,
+            restitution: -100,
             isStatic: true,
             density: 1,
             render: {
                 fillStyle: "transparent"
-
             }
         }
 
@@ -129,12 +132,12 @@ const Scene = ({ productData }) => {
                 label: "wall_bottom"
             }),
             // Left
-            Bodies.rectangle(0, matterHeight, WALLWIDTH, matterWidth * 2, {
+            Bodies.rectangle(0, matterHeight - 200, WALLWIDTH, matterWidth * 2, {
                 ...wallOptions,
                 label: "wall_left"
             }),
             // Right
-            Bodies.rectangle(matterWidth, 0, WALLWIDTH, matterWidth * 2, {
+            Bodies.rectangle(matterWidth, 200, WALLWIDTH, matterWidth * 2, {
                 ...wallOptions,
                 label: "wall_right"
             })
@@ -146,12 +149,15 @@ const Scene = ({ productData }) => {
         var mouseInteractivity = Matter.MouseConstraint.create(engine, {
             mouse: render.mouse,
             constraint: {
-                stiffness: 0.2,
+                stiffness: 1,
                 render: { visible: false }
             }
         });
 
         Matter.World.add(engine.world, mouseInteractivity);
+
+        //Check for drag
+
 
         // Create a On-Mouseup Event-Handler (for url)
         Events.on(mouseInteractivity, 'mouseup', function(event) {
@@ -165,7 +171,7 @@ const Scene = ({ productData }) => {
                     console.log("Body.Url >> " + bodyUrl);
                     // Hyperlinking feature
                     if (bodyUrl != undefined) {
-                        window.open(bodyUrl, '_blank');
+                        window.open(bodyUrl, '_self');
                         console.log("Hyperlink was opened");
                     }
                     break;
@@ -204,13 +210,13 @@ const Scene = ({ productData }) => {
                         }
 
                         if (b.isStatic) {
-                            e.target.innerHTML = "Start";
+                            e.target.innerHTML = "Nevermind I like the bounce";
                         } else if (!b.isStatic) {
-                            e.target.innerHTML = "Stop";
+                            e.target.innerHTML = "I give up, hold still!";
                         }
                     })
                 }}>
-                    Stop
+                    I give up, hold still!
                 </button>
             </div>
         </>

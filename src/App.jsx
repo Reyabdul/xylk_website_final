@@ -11,8 +11,8 @@ const App = ({client}) => {
 
     //fetch all products
     useEffect(() => {
-        client.product.fetchAll()
-        .then((data) => setProductData(data))
+        client.collection.fetchAllWithProducts()
+        .then((data) => setProductData(data[6].products))
         .catch((error) => {
             console.log(error);
         })

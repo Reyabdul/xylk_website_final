@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import Client from "shopify-buy";
 import { createRoot } from 'react-dom/client';
 
-
 import App from "../src/App"
 
 //ACCESSING SHOPIFY

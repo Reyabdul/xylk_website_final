@@ -1,5 +1,7 @@
 .bags {
-    width: 50px;
     display: none;
-    cursor: pointer;
+}
+
+.bags img {
+    width: 200px;
 }

@@ -96,8 +96,7 @@ const ModelScene = () => {
     
                     node.material.wireframe = false;
                 });
-    
-                console.log(object);
+
                 scene.add(object);
     
                 object.scale.set(3, 3, 3);

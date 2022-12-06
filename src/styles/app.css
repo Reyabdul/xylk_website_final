@@ -5,6 +5,7 @@ body {
   padding: 1rem;
   color: black;
   font-family: "Arial", Arial, sans-serif;
+  overflow: hidden;
 }
 
 .product-images {
@@ -18,15 +19,17 @@ body {
 }
 
 #stop-button {
-  position: absolute;
-  top: 5rem;
-  left: 50%;
+  position: relative;
+  top: 2rem;
+  left: 4rem;
   width: 200px;
   z-index: 999;
 }
 
 canvas {
   position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #bags-canvas {
