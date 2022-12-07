@@ -27,10 +27,8 @@ const App = ({client}) => {
             <div id = "figure-canvas">
                 <ModelScene />
             </div>
-        </>
-
-            
+        </>     
     )
-}
+};
 
 export default App;

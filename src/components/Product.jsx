@@ -1,16 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
-import Scene from "./Scene";
-import Matter from "matter-js";
-import "../styles/product.css"       
+import React from "react";
+import "../styles/Product.css"       
 
 
 const Products = ({productData}) => {
-
+/*
     //open the store url
     const openProductWindow = (e) => {
         console.log(e.target.dataset.url)
         window.location.href = e.target.dataset.url;
     }
+*/
 
     return (
         
@@ -20,10 +19,10 @@ const Products = ({productData}) => {
                         <div className="bags" key={product.id}>
                             <img 
                                 className="image-send" 
-                                data-url={product.onlineStoreUrl} 
+                                //data-url={product.onlineStoreUrl} 
                                 src={product.images[0].src} 
-                                onClick={(e) => openProductWindow(e)}
-                                style={{display: "none"}}
+                                //onClick={(e) => openProductWindow(e)}
+                                //style={{display: "none"}}
                             />
                         </div>
                     )

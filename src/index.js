@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Client from "shopify-buy";
 import { createRoot } from 'react-dom/client';
 
@@ -17,6 +16,5 @@ const client = Client.buildClient({
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-  
   <App client={client}/>
 )
