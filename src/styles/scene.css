@@ -1,7 +1,8 @@
 
-.stop-button {
-    position: absolute;
-    top: 5rem;
-    left: 50%;
+#stop-button {
+    position: relative;
+    top: 2rem;
+    display: block;
+    margin: 0 auto;
     width: 200px;
   }

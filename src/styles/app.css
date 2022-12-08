@@ -19,9 +19,6 @@ body {
 }
 
 #stop-button {
-  position: relative;
-  top: 2rem;
-  left: 4rem;
   width: 200px;
   z-index: 999;
 }

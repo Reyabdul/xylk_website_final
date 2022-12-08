@@ -9,6 +9,7 @@
 import React, { useEffect, useRef } from "react";
 import Matter, { Engine, Render, Runner, World, Body, Bodies, Events, Mouse, MouseConstraint } from "matter-js";
 import Products from "./Product";
+import "../styles/scene.css"
 
 const Scene = ({ productData }) => {
 
@@ -19,8 +20,8 @@ const Scene = ({ productData }) => {
 
     //Dimensions use for engine
     const VIEW = {};
-    VIEW.width = window.innerWidth - 70;
-    VIEW.height = window.innerHeight - 70;
+    VIEW.width = window.innerWidth ;
+    VIEW.height = window.innerHeight;
     VIEW.centerX = VIEW.width / 2;
     VIEW.centerY = VIEW.height / 2;
     VIEW.offsetX = VIEW.width / 2;
@@ -123,12 +124,12 @@ const Scene = ({ productData }) => {
                 label: "wall_bottom"
             }),
             // Left
-            Bodies.rectangle(0, VIEW.height - 200, WALLWIDTH, VIEW.width  * 2, {
+            Bodies.rectangle(0, 350, WALLWIDTH, VIEW.width  * 2, {
                 ...wallOptions,
                 label: "wall_left"
             }),
             // Right
-            Bodies.rectangle(VIEW.width , 200, WALLWIDTH, VIEW.width  * 2, {
+            Bodies.rectangle(VIEW.width , 350, WALLWIDTH, VIEW.width  * 2, {
                 ...wallOptions,
                 label: "wall_right"
             })
